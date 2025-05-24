@@ -1,22 +1,207 @@
+/* 基本スタイル */
 body {
-    font-family: sans-serif; /* フォントの種類 */
-    line-height: 1.6;      /* 行の高さ */
-    margin: 0;             /* 外側の余白をなくす */
-    padding: 20px;         /* 内側の余白 */
-    background-color: #f4f4f4; /* 背景色 */
-    color: #333;           /* 文字色 */
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* ベースの背景色 */
+    color: #333;
 }
 
-h1 {
-    color: #007bff; /* 見出しの色 */
+/* ヘッダー */
+header {
+    background-color: #869ea0; /* ラフの #869eal に近い色 (仮) */
+    color: #fff;
+    padding: 20px;
+    text-align: center; /* 全体図を参考に中央揃え気味に */
 }
 
-/* スマホ向けのスタイル (画面幅が600px以下の場合) */
-@media (max-width: 600px) {
-    body {
-        padding: 10px;
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* タイトルと画像を中央に寄せる */
+    gap: 20px; /* タイトルと画像の間のスペース */
+    margin-bottom: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em; /* 少し大きめに */
+}
+
+.header-character-image {
+    max-height: 80px; /* キャラクター画像の最大の高さ */
+    width: auto;
+    border-radius: 50%; /* 丸くするなら */
+    border: 2px solid #fff; /* 白い枠線 */
+}
+
+.site-description {
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* ナビゲーション */
+nav {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block; /* 横並びにする場合 */
+    /* display: block; */ /* 縦並びでボタン風にする場合はこちらを有効化 */
+    margin: 0 10px; /* 横並びの場合の左右マージン */
+    /* margin-bottom: 10px; */ /* 縦並びの場合の下マージン */
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block; /* クリック範囲を広げる */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+/* メインコンテンツ */
+main {
+    padding: 20px;
+    max-width: 900px; /* メインコンテンツの最大幅 */
+    margin: 20px auto; /* 中央揃え */
+    background-color: #fff; /* コンテンツエリアの背景色 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* ちょっと影をつける */
+}
+
+.content-section {
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee; /* セクション間の区切り線 */
+}
+
+.content-section:last-child {
+    border-bottom: none; /* 最後のセクションの線は消す */
+}
+
+.content-section h2 {
+    color: #333;
+    margin-top: 0;
+    border-bottom: 2px solid #869eaf; /* ヘッダーの色と合わせる */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.content-section h3 {
+    color: #555;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.content-section h4 {
+    color: #666;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+/* 画像共通スタイル */
+img.pc-image,
+img.character-image,
+img.gensan-image {
+    max-width: 100%; /* コンテナ幅に合わせて縮小 */
+    height: auto;
+    display: block; /* 余計な下マージンを防ぐ */
+    margin: 10px 0; /* 上下マージン */
+    border-radius: 5px; /* 角を少し丸める */
+}
+
+/* 布陣情報 PC画像 */
+.pc-info {
+    margin-bottom: 20px;
+}
+.pc-image {
+    max-width: 250px; /* PC画像の最大幅を調整 */
+    /* float: right; */ /* 右寄せにする場合 (調整が必要) */
+    /* margin-left: 15px; */ /* 右寄せする場合の左マージン */
+}
+
+/* オリジナルキャラクター */
+.character-profile {
+    display: flex; /* 横並びにする */
+    flex-wrap: wrap; /* 画面が狭い場合は折り返す */
+    gap: 20px; /* キャラ間のスペース */
+    margin-bottom: 20px;
+}
+
+.character-item {
+    flex: 1; /* スペースを均等に分ける */
+    min-width: 200px; /* 最小幅 */
+    text-align: center;
+}
+
+.character-image {
+    max-height: 200px; /* キャラクター画像の高さ調整 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gensan-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.gensan-image {
+    max-height: 150px; /* 原案画像の高さ調整 */
+}
+
+
+/* リンク集 */
+#links ul {
+    list-style-type: disc; /* 通常の箇条書きマーカー */
+    padding-left: 20px;
+}
+
+#links a {
+    color: #007bff; /* リンクの色 */
+    text-decoration: none;
+}
+
+#links a:hover {
+    text-decoration: underline;
+}
+
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    margin-top: 30px;
+}
+
+/* レスポンシブ対応 (簡単なもの) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5em;
     }
-    h1 {
-        font-size: 1.8em; /* 少し小さくする */
+    .header-content {
+        flex-direction: column; /* ヘッダーのタイトルと画像を縦並びに */
+    }
+    nav ul li {
+        display: block; /* スマホではナビゲーションを縦並びに */
+        margin: 10px 0;
+    }
+    .character-profile {
+        flex-direction: column; /* スマホではキャラプロフを縦並びに */
+        align-items: center;
     }
 }
