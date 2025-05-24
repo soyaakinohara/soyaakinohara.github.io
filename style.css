@@ -1,0 +1,22 @@
+body {
+    font-family: sans-serif; /* フォントの種類 */
+    line-height: 1.6;      /* 行の高さ */
+    margin: 0;             /* 外側の余白をなくす */
+    padding: 20px;         /* 内側の余白 */
+    background-color: #f4f4f4; /* 背景色 */
+    color: #333;           /* 文字色 */
+}
+
+h1 {
+    color: #007bff; /* 見出しの色 */
+}
+
+/* スマホ向けのスタイル (画面幅が600px以下の場合) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 1.8em; /* 少し小さくする */
+    }
+}
