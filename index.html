@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>秋ノ原窓也のホームページ</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- CSSのパスを games/style.css に変更 -->
+    <link rel="stylesheet" href="games/style.css">
 </head>
 <body>
     <header>
         <div class="header-content">
             <h1>秋ノ原窓也のホームページ</h1>
+            <!-- 画像パスは変更なし (ルートのimagesフォルダを参照) -->
             <img src="images/header_character.png" alt="キャラクター" class="header-character-image">
         </div>
         <p class="site-description">秋ノ原窓也のホームページです。プロフィールや布陣情報などを書いています。ゆっくりしていってください</p>
@@ -20,7 +22,21 @@
             <li><a href="#profile">プロフィール</a></li>
             <li><a href="#lineup">布陣情報</a></li>
             <li><a href="#original-character">オリキャラ</a></li>
-            <li><a href="#links">リンク集</a></li>
+            <li><a href="#links">リンク集</a></li> 
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ゲーム</a>
+                <ul class="dropdown-content">
+                    <li><a href="games/block/game.html">ブロック崩し</a></li>
+                    <!-- 他のゲームを追加する場合はここに追加 -->
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">便利ツール</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">ツール1 (準備中)</a></li>
+                    <!-- 他の便利ツールを追加する場合はここに追加 -->
+                </ul>
+            </li>
         </ul>
     </nav>
 
@@ -29,7 +45,7 @@
             <h2>プロフィール</h2>
             <p>熊本県に住んでいるガジェットオタク。</p>
             <p>主にパソコン(自作ジャンク問わず)、スマホ集め、オーディオ、AIなどに興味がある。自分で作成したアプリをgithubにて公開中。</p>
-            <p>推しは原神のノエルと、ブルアカのアロナプラ</p>
+            <p>推しは原神のノエルと、ブルアカのアロプラ</p>
             <p>やっているゲームはマイクラ、miside、maimai、ポラリスコード (最近はもうほとんどしてないが)</p>
             <p>音楽はハードコアを主に聞いている。S3RL、REMZCORE、ilyhiryuなど。happy hardcore frenchcore jumpstylecoreが好き。</p>
         </section>
@@ -96,9 +112,7 @@
 
         <section id="original-character" class="content-section">
             <h2>オリジナルキャラクターについて</h2>
-            <!-- この下に、姉妹の詳細情報をまとめた一枚の画像を配置します -->
             <img src="images/aki_sisters_summary.png" alt="秋ノ原姉妹 詳細" class="original-character-summary-image">
-
             <div class="character-description">
                 <p>殺伐とした終末世界で生きているという設定があったりする</p>
                 <p>妹の方しか設定が固まってないがダウナー系の少女</p>
@@ -133,12 +147,11 @@
             <p><a href="https://music.apple.com/profile/soyaakinohara" target="_blank" rel="noopener noreferrer">@soyaaakinohara</a></p>
             <h3>weibo</h3>
             <p><a href="https://weibo.com/u/7993093882" target="_blank" rel="noopener noreferrer">@soyaakinohara</a></p>
-            <!-- 他のリンクも同様に追加 -->
         </section>
     </main>
 
     <footer>
-        <p>© 2024 秋ノ原窓也</p>
+        <p>© 2025 秋ノ原窓也</p>
     </footer>
 
 </body>

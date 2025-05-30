@@ -59,6 +59,102 @@ nav ul li {
     /* display: block; */ /* 縦並びでボタン風にする場合はこちらを有効化 */
     margin: 0 10px; /* 横並びの場合の左右マージン */
     /* margin-bottom: 10px; */ /* 縦並びの場合の下マージン */
+    position: relative; /* プルダウンのために追加 */
+}
+
+/* --- ここからプルダウンメニュー用のスタイルを追加 --- */
+
+/* ドロップダウンの親要素(.dropdown) */
+nav ul li.dropdown {
+    /* 特に新しいスタイルは不要な場合が多い */
+}
+
+/* ドロップダウンボタン(.dropbtn) - 必要であれば個別にスタイル調整 */
+nav ul li.dropdown .dropbtn {
+    /* display: inline-block; /* aタグなので元々block */
+}
+
+/* ドロップダウンコンテンツ本体 (初期状態は非表示) */
+nav ul li.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444; /* プルダウンの背景色 */
+    min-width: 160px; /* プルダウンの最小幅 */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1; /* 他の要素より手前に表示 */
+    border-radius: 0 0 5px 5px; /* 下角だけ丸めるなど */
+    left: 0; /* 親liの左端に合わせる */
+    top: 100%; /* 親liのすぐ下に表示 */
+}
+
+/* ドロップダウン内のリンク */
+nav ul li.dropdown .dropdown-content li {
+    display: block; /* 縦並びにする */
+    margin: 0; /* li間のマージンをリセット */
+}
+
+nav ul li.dropdown .dropdown-content li a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left; /* 左揃えにする */
+    border-radius: 0; /* 個々のリンクの角丸は不要なら */
+}
+
+/* ドロップダウン内のリンクのホバーエフェクト */
+nav ul li.dropdown .dropdown-content li a:hover {
+    background-color: #666;
+}
+
+/* 親要素(.dropdown) にホバーした時にドロップダウンコンテンツを表示 */
+nav ul li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* レスポンシブ対応の調整 (スマホで縦並びになった時) */
+@media (max-width: 768px) {
+    /* 既存の nav ul li { display: block; } は活かす */
+
+    nav ul li.dropdown .dropdown-content {
+        position: static; /* 通常のブロック要素として振る舞う */
+        display: none; /* 初期は隠す、JSで開閉制御が推奨 */
+        box-shadow: none;
+        background-color: #3a3a3a; /* 少し色を変えても良い */
+        padding-left: 15px; /* インデントをつける */
+    }
+
+    /* スマホ表示でプルダウンを常に開いておくか、
+       もしくはJSでクリック開閉にするかの判断が必要。
+       CSSだけでのホバーはタッチデバイスでは使いにくい。
+       ここでは、ホバーで開く挙動のままですが、
+       JSでの制御を検討する方が良いでしょう。
+
+       もしCSSだけで常に開いておくなら以下のように display:block にします。
+       nav ul li.dropdown:hover .dropdown-content,
+       nav ul li.dropdown .dropdown-content { // スマホでは常に開いておく場合
+           display: block;
+       }
+    */
+
+    /* クリックで開閉するための簡単なJSの例（CSSのみでは限界あり）
+       以下のJSを別途追加する必要があります。
+    */
+    /*
+    document.querySelectorAll('.dropbtn').forEach(button => {
+        button.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault(); // a タグのデフォルト動作を止める
+                let content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            }
+        });
+    });
+    */
 }
 
 nav ul li a {
@@ -73,6 +169,7 @@ nav ul li a {
 nav ul li a:hover {
     background-color: #555;
 }
+
 
 /* メインコンテンツ */
 main {
