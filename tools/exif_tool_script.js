@@ -191,7 +191,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Canvasの内容を画像データURLとして取得 (PNG形式)
-        const dataURL = imageCanvas.toDataURL("image/png"); 
+          // --- ▼▼▼ ここを修正 ▼▼▼ ---
+        // Canvasの内容を画像データURLとして取得 (JPEG形式、品質0.85)
+        const imageType = 'image/jpeg'; // 保存形式をJPEGに
+        const imageQuality = 0.9;   // JPEGの品質 (0.0 から 1.0) お好みで調整
+        const dataURL = imageCanvas.toDataURL(imageType, imageQuality); 
+        // --- ▲▲▲ ここまで修正 ▲▲▲ ---
         // またはJPEG形式: const dataURL = imageCanvas.toDataURL("image/jpeg", 0.9); // 0.9は品質
 
         // ダウンロード用のリンクを作成
@@ -200,15 +205,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // ファイル名の生成 (例: originalname_watermarked.png)
         const originalFileName = imageUpload.files[0] ? imageUpload.files[0].name.split('.').slice(0, -1).join('.') : "image";
-        link.download = `${originalFileName}_watermarked.png`; // PNGで保存する場合
-        // link.download = `${originalFileName}_watermarked.jpg`; // JPEGで保存する場合
+        //link.download = `${originalFileName}_watermarked.png`; // PNGで保存する場合
+        link.download = `${originalFileName}_watermarked.jpg`; // JPEGで保存する場合
 
         // リンクをクリックさせてダウンロードを実行
         document.body.appendChild(link); // Firefoxで必要
         link.click();
         document.body.removeChild(link); // 後処理
 
-        alert("画像を保存しました！ (PNG形式)");
+        alert("画像を保存しました！ (JPEG形式)");
     });
 
 });
