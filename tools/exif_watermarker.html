@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exif透かしツール - 秋ノ原窓也のホームページ</title>
+    <!-- CSSのパスをルートの games/style.css を指すように ../games/style.css に変更 -->
+    <link rel="stylesheet" href="../games/style.css">
+    <style>
+        /* このツール専用の追加スタイルはここに記述できます */
+        #toolContainer {
+            padding: 20px;
+            background-color: #fff; /* メインコンテンツの背景に合わせるなど */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        #imageUploadLabel {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        #imageUploadLabel:hover {
+            background-color: #0056b3;
+        }
+        #imageUpload {
+            display: none; /* 標準のファイル選択ボタンは隠す */
+        }
+        #imagePreviewContainer {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px dashed #ccc;
+            min-height: 200px; /* 画像がないときもある程度の高さを確保 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+        #imageCanvas {
+            max-width: 100%; /* コンテナの幅に合わせる */
+            height: auto;   /* アスペクト比を維持 */
+            display: block; /* 余計なマージンを防ぐ */
+        }
+        #exifInfoOutput {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 3px;
+            white-space: pre-wrap; /* 改行やスペースをそのまま表示 */
+            font-family: monospace;
+        }
+        .tool-buttons button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #28a745; /* 保存ボタンは緑系 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .tool-buttons button:hover {
+            opacity: 0.9;
+        }
+        .tool-buttons button#resetButton {
+            background-color: #dc3545; /* やり直しボタンは赤系 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>秋ノ原窓也のホームページ</h1>
+            <!-- 画像パスをルートの images/ を指すように ../images/ に変更 -->
+            <img src="../images/header_character.png" alt="キャラクター" class="header-character-image">
+        </div>
+        <p class="site-description">秋ノ原窓也のホームページです。プロフィールや布陣情報などを書いています。ゆっくりしていってください</p>
+    </header>
+
+    <nav>
+        <ul>
+            {/* <!-- index.htmlへのリンクパスを ../index.html#... に変更 --> */}
+            <li><a href="../index.html#profile">プロフィール</a></li>
+            <li><a href="../index.html#lineup">布陣情報</a></li>
+            <li><a href="../index.html#original-character">オリキャラ</a></li>
+            <li><a href="../index.html#links">リンク集</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ゲーム</a>
+                <ul class="dropdown-content">
+                    {/* <!-- ブロック崩しへのパスを ../games/block/game.html に変更 --> */}
+                    <li><a href="../games/block/game.html">ブロック崩し</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">便利ツール</a>
+                <ul class="dropdown-content">
+                    {/* <!-- このツール自身へのリンク (アクティブ表示などは後で検討) --> */}
+                    <li><a href="exif_watermarker.html">Exif透かしツール</a></li>
+                    <li><a href="#">ツール2 (準備中)</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="exif-tool-section" class="content-section">
+            <h2>写真に機種名などの透かしを入れるツール</h2>
+            <p>写真に機種名などの透かしを入れられます。データはブラウザ上で処理されるのでサーバーに残ったりしないので安心です。</p>
+
+            <div id="toolContainer">
+                <div>
+                    <label for="imageUpload" id="imageUploadLabel">画像を選択 (JPEG推奨)</label>
+                    <input type="file" id="imageUpload" accept="image/jpeg, image/png">
+                </div>
+
+                <div id="imagePreviewContainer">
+                    <canvas id="imageCanvas"></canvas>
+                </div>
+
+                <h3>取得されたExif情報 (一部):</h3>
+                <div id="exifInfoOutput">(ここにExif情報が表示されます)</div>
+
+                <div class="tool-buttons">
+                    <button id="saveButton">画像を保存</button>
+                    <button id="resetButton">やり直し</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 秋ノ原窓也</p>
+    </footer>
+
+    <!-- Exif.js ライブラリの読み込み (あとで配置) -->
+     <script src="exif.js"></script> 
+    <!-- このツール専用のJavaScript (あとで作成) -->
+     <script src="exif_tool_script.js"></script> 
+</body>
+</html>
