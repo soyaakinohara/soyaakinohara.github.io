@@ -42,7 +42,13 @@ export function renderMemoContent(contentAreaElement, memoData, onMemoUpdateCall
     addItemButton.addEventListener('click', () => {
         const newItem = { text: "", checked: false };
         const updatedItems = [...memoData.items, newItem];
-        onMemoUpdateCallback(memoData.id, { ...memoData, items: updatedItems, lastModified: Date.now() }, updatedItems.length - 1);
+        // タイトル入力欄から最新のタイトルを取得して渡す
+        const currentTitleInDOM = titleInput.value; // このスコープの titleInput を参照
+        onMemoUpdateCallback(
+            memoData.id,
+            { ...memoData, title: currentTitleInDOM, items: updatedItems, lastModified: Date.now() },
+            updatedItems.length - 1
+        );
     });
     contentAreaElement.appendChild(addItemButton);
 
@@ -115,7 +121,10 @@ function createMemoItemElement(itemData, itemIndex, fullMemoData, onMemoUpdateCa
         const newItems = fullMemoData.items.map((it, idx) =>
             idx === itemIndex ? { ...it, checked: event.target.checked } : it
         );
-        onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, items: newItems, lastModified: Date.now() });
+        // タイトル入力欄から最新のタイトルを取得して渡す
+        const titleInputElement = itemDiv.closest('.memo-content-area')?.querySelector('.memo-title-input');
+        const currentTitleInDOM = titleInputElement ? titleInputElement.value : fullMemoData.title;
+        onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, title: currentTitleInDOM, items: newItems, lastModified: Date.now() });
     });
     itemDiv.appendChild(checkbox);
 
@@ -134,7 +143,9 @@ function createMemoItemElement(itemData, itemIndex, fullMemoData, onMemoUpdateCa
             const newItems = fullMemoData.items.map((it, idx) =>
                 idx === itemIndex ? { ...it, text: newText } : it
             );
-            onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, items: newItems, lastModified: Date.now() });
+            const titleInputElement = itemDiv.closest('.memo-content-area')?.querySelector('.memo-title-input');
+            const currentTitleInDOM = titleInputElement ? titleInputElement.value : fullMemoData.title;
+            onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, title: currentTitleInDOM, items: newItems, lastModified: Date.now() });
         }
     });
     textDiv.addEventListener('blur', () => {
@@ -144,25 +155,36 @@ function createMemoItemElement(itemData, itemIndex, fullMemoData, onMemoUpdateCa
             const newItems = fullMemoData.items.map((it, idx) =>
                 idx === itemIndex ? { ...it, text: newText } : it
             );
-            onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, items: newItems, lastModified: Date.now() });
+            const titleInputElement = itemDiv.closest('.memo-content-area')?.querySelector('.memo-title-input');
+            const currentTitleInDOM = titleInputElement ? titleInputElement.value : fullMemoData.title;
+            onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, title: currentTitleInDOM, items: newItems, lastModified: Date.now() });
         }
     });
     textDiv.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             if (isComposing) return;
             event.preventDefault();
-            const currentText = textDiv.textContent;
+            const currentItemText = textDiv.textContent;
             let itemsArrayBeforeUpdate = [...fullMemoData.items];
-            if (itemsArrayBeforeUpdate[itemIndex] && itemsArrayBeforeUpdate[itemIndex].text !== currentText) {
-                itemsArrayBeforeUpdate[itemIndex] = { ...itemsArrayBeforeUpdate[itemIndex], text: currentText };
+            if (itemsArrayBeforeUpdate[itemIndex] && itemsArrayBeforeUpdate[itemIndex].text !== currentItemText) {
+                itemsArrayBeforeUpdate[itemIndex] = { ...itemsArrayBeforeUpdate[itemIndex], text: currentItemText };
             }
+
+            // タイトル入力欄から最新のタイトルを取得
+            const titleInputElement = itemDiv.closest('.memo-content-area')?.querySelector('.memo-title-input');
+            const currentTitleInDOM = titleInputElement ? titleInputElement.value : fullMemoData.title;
+
             const newItem = { text: "", checked: false };
             const newItems = [
                 ...itemsArrayBeforeUpdate.slice(0, itemIndex + 1),
                 newItem,
                 ...itemsArrayBeforeUpdate.slice(itemIndex + 1)
             ];
-            onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, items: newItems, lastModified: Date.now() }, itemIndex + 1);
+            onMemoUpdateCallback(
+                fullMemoData.id,
+                { ...fullMemoData, title: currentTitleInDOM, items: newItems, lastModified: Date.now() },
+                itemIndex + 1
+            );
         }
     });
     itemDiv.appendChild(textDiv);
@@ -171,17 +193,11 @@ function createMemoItemElement(itemData, itemIndex, fullMemoData, onMemoUpdateCa
     deleteItemButton.classList.add('delete-memo-item-btn');
     deleteItemButton.innerHTML = '×';
     deleteItemButton.title = 'この行を削除';
-    // インラインスタイルは一時的なものとして、CSSファイルでの定義を推奨
-    // deleteItemButton.style.marginLeft = 'auto';
-    // deleteItemButton.style.padding = '2px 6px';
-    // deleteItemButton.style.fontSize = '0.9em';
-    // deleteItemButton.style.border = '1px solid #ccc';
-    // deleteItemButton.style.borderRadius = '3px';
-    // deleteItemButton.style.cursor = 'pointer';
-    // deleteItemButton.style.lineHeight = '1';
     deleteItemButton.addEventListener('click', () => {
         const newItems = fullMemoData.items.filter((_, idx) => idx !== itemIndex);
-        onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, items: newItems, lastModified: Date.now() });
+        const titleInputElement = itemDiv.closest('.memo-content-area')?.querySelector('.memo-title-input');
+        const currentTitleInDOM = titleInputElement ? titleInputElement.value : fullMemoData.title;
+        onMemoUpdateCallback(fullMemoData.id, { ...fullMemoData, title: currentTitleInDOM, items: newItems, lastModified: Date.now() });
     });
     itemDiv.appendChild(deleteItemButton);
 
