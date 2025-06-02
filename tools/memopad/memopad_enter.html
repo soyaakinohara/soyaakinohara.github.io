@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メモ帳 on browser - 秋ノ原窓也のホームページ</title>
+    <!-- 外部CSSのパス (memopad_enter.html から見て) -->
+    <link rel="stylesheet" href="../../games/style.css">
+    <style>
+        /* このページ専用の追加スタイル (もしあれば) */
+        .enter-container {
+            background-color: #fff;
+            padding: 30px 20px; /* 少し広めにパディング */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center; /* コンテンツを中央揃え */
+            max-width: 700px; /* コンテンツの最大幅 */
+            margin: 20px auto; /* 上下左右中央揃え */
+        }
+        .enter-container h2 {
+            border-bottom: 2px solid #869eaf;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em; /* タイトルを少し大きく */
+        }
+        .enter-description {
+            font-size: 1.1em; /* 説明文を少し大きく */
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: left; /* 説明文は左揃え */
+        }
+        .tool-link-button {
+            display: inline-block;
+            padding: 12px 30px; /* ボタンを大きく */
+            background-color: #555; /* ナビゲーションのホバー色 */
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .tool-link-button:hover {
+            background-color: #869ea0; /* ヘッダーの色 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>秋ノ原窓也のホームページ</h1>
+            <!-- ヘッダー画像のパス (memopad_enter.html から見て) -->
+            <img src="../../images/header_character.png" alt="キャラクター" class="header-character-image">
+        </div>
+        <p class="site-description">秋ノ原窓也のホームページです。プロフィールや布陣情報などを書いています。ゆっくりしていってください</p>
+    </header>
+
+    <nav>
+        <ul>
+            <!-- ホームページトップへのリンク (memopad_enter.html から見て) -->
+            <li><a href="../../index.html#profile">プロフィール</a></li>
+            <li><a href="../../index.html#lineup">布陣情報</a></li>
+            <li><a href="../../index.html#original-character">オリキャラ</a></li>
+            <li><a href="../../index.html#links">リンク集</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ゲーム</a>
+                <ul class="dropdown-content">
+                    <!-- ブロック崩しへのリンク (memopad_enter.html から見て) -->
+                    <li><a href="../../games/block/game.html">ブロック崩し</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">便利ツール</a>
+                <ul class="dropdown-content">
+                    <!-- 他のツールへのリンク (memopad_enter.html から見て) -->
+                    <li><a href="../exif_watermarker.html">Exif透かしツール</a></li>
+                    <li><a href="../dotillust/dot_art_maker.html">ドッド絵っぽくするツール</a></li>
+                    <li><a href="memopad_enter.html">メモ帳 on browser</a></li> <!-- このページ自身へのリンク -->
+                    <!-- <li><a href="../mindmapping/enter.html">マインドマップツール</a></li> (もしあれば) -->
+                    <li><a href="#"></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="memopad-entry" class="content-section">
+            <div class="enter-container">
+                <h2>メモ帳 on browser</h2>
+                <p class="enter-description">
+                    ブラウザ上で動作する簡単なメモ帳です。TODOリストなどにお使いいただけます。データはブラウザのローカルに自動保存されるため安心してお使いください。作成したメモは保存されるためページを閉じて再び開いた後も続きを編集できます。また、メモを画像として保存することもできます。
+                </p>
+                <!-- メモ帳本体へのリンク -->
+                <a href="memopad_programs/memopad_programs.html" class="tool-link-button">ツールへ</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 秋ノ原窓也</p>
+    </footer>
+
+</body>
+</html>
