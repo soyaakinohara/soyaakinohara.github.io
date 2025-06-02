@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドッド絵っぽくするツール - 秋ノ原窓也のホームページ</title>
+    <!-- CSSのパスを修正 -->
+    <link rel="stylesheet" href="../../games/style.css">
+    <style>
+        /* ... (このツールページ専用の追加スタイルは変更なし) ... */
+        .tool-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .tool-container h2 {
+            border-bottom: 2px solid #869eaf;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .tool-container label,
+        .tool-container input,
+        .tool-container button {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        .tool-container input[type="file"],
+        .tool-container input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 18px); /* paddingを考慮 */
+        }
+        .tool-container button {
+            background-color: #555; /* ナビゲーションのホバー色に合わせる */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .tool-container button:hover {
+            background-color: #869ea0; /* ヘッダーの色に合わせる */
+        }
+        .tool-container button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .canvas-container {
+            margin-top: 20px;
+            text-align: center; /* Canvasを中央揃え */
+        }
+        .canvas-container canvas {
+            border: 1px solid #ddd;
+            max-width: 100%; /* レスポンシブ対応 */
+            height: auto;    /* アスペクト比維持 */
+            margin-bottom: 10px;
+            background-color: #f0f0f0; /* 背景を少しつけて透明画像でもわかりやすく */
+        }
+        .canvas-container h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        #downloadLink {
+            display: inline-block; /* aタグをボタンっぽくするため */
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        #downloadLink:hover {
+            background-color: #0056b3;
+        }
+        .description {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>秋ノ原窓也のホームページ</h1>
+            <!-- header_character.png のパスを修正 -->
+            <img src="../../images/header_character.png" alt="キャラクター" class="header-character-image">
+        </div>
+        <p class="site-description">秋ノ原窓也のホームページです。プロフィールや布陣情報などを書いています。ゆっくりしていってください</p>
+    </header>
+
+    <nav>
+        <ul>
+            <!-- index.htmlへのリンクなどを修正 -->
+            <li><a href="../../index.html#profile">プロフィール</a></li>
+            <li><a href="../../index.html#lineup">布陣情報</a></li>
+            <li><a href="../../index.html#original-character">オリキャラ</a></li>
+            <li><a href="../../index.html#links">リンク集</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ゲーム</a>
+                <ul class="dropdown-content">
+                    <!-- games/block/game.html へのパスを修正 -->
+                    <li><a href="../../games/block/game.html">ブロック崩し</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">便利ツール</a>
+                <ul class="dropdown-content">
+                    <!-- exif_watermarker.html へのパスを修正 -->
+                    <li><a href="../exif_watermarker.html">Exif透かしツール</a></li>
+                    <!-- このページ(dot_art_maker.html)へのリンクは相対パスなら # または空、絶対パスなら ../dotillust/dot_art_maker.html -->
+                    <li><a href="dot_art_maker.html">ドッド絵っぽくするツール</a></li>
+                    <li><a href="#">ツール3 (準備中)</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="dot-art-tool" class="content-section">
+            <div class="tool-container">
+                <h2>ドッド絵っぽくするツール</h2>
+                <p class="description">画像をドット絵っぽくします。ぽいだけで本当のドット絵といえるかはわかりませんがぜひご活用ください。多分画像圧縮ツールとしても使えます。数字を2にすると大体1/4くらいになります。</p>
+
+                <label for="imageUploader">画像ファイルを選択してください:</label>
+                <input type="file" id="imageUploader" accept="image/*">
+
+                <label for="dotSize">ドットの粗さ (元画像の1ドットが何ピクセル分になるか。数字が大きいほど粗くなります):</label>
+                <input type="number" id="dotSize" value="10" min="1">
+
+                <button id="convertToDotButton" disabled>変換する</button>
+
+                <div class="canvas-container">
+                    <h3>元画像 (プレビュー)</h3>
+                    <canvas id="originalCanvasPreview"></canvas>
+                </div>
+
+                <div class="canvas-container">
+                    <h3>ドット絵風画像</h3>
+                    <canvas id="dotArtCanvas"></canvas>
+                    <a id="downloadLink" style="display:none;" download="dot-art.png">ダウンロード</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 秋ノ原窓也</p>
+    </footer>
+
+    <script>
+        // JavaScript部分は変更なしでOK
+        const imageUploader = document.getElementById('imageUploader');
+        const dotSizeInput = document.getElementById('dotSize');
+        const convertButton = document.getElementById('convertToDotButton');
+        const originalCanvasPreview = document.getElementById('originalCanvasPreview');
+        const dotArtCanvas = document.getElementById('dotArtCanvas');
+        const downloadLink = document.getElementById('downloadLink');
+
+        let originalImage = null;
+        const hiddenOriginalCanvas = document.createElement('canvas'); // 内部処理用
+
+        imageUploader.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    originalImage = new Image();
+                    originalImage.onload = () => {
+                        // 元画像のサイズを調整してプレビュー (大きすぎる場合のため)
+                        const maxPreviewSize = 300; // プレビューの最大幅/高さ
+                        let previewWidth = originalImage.width;
+                        let previewHeight = originalImage.height;
+                        if (previewWidth > maxPreviewSize || previewHeight > maxPreviewSize) {
+                            if (previewWidth > previewHeight) {
+                                previewHeight = Math.round(previewHeight * (maxPreviewSize / previewWidth));
+                                previewWidth = maxPreviewSize;
+                            } else {
+                                previewWidth = Math.round(previewWidth * (maxPreviewSize / previewHeight));
+                                previewHeight = maxPreviewSize;
+                            }
+                        }
+                        drawToCanvas(originalCanvasPreview, originalImage, previewWidth, previewHeight);
+
+                        // 内部処理用Canvasには元サイズで描画
+                        hiddenOriginalCanvas.width = originalImage.width;
+                        hiddenOriginalCanvas.height = originalImage.height;
+                        const hiddenCtx = hiddenOriginalCanvas.getContext('2d');
+                        hiddenCtx.drawImage(originalImage, 0, 0, originalImage.width, originalImage.height);
+
+                        convertButton.disabled = false;
+                        downloadLink.style.display = 'none'; // 新しい画像を読み込んだらダウンロードリンクを隠す
+                        dotArtCanvas.getContext('2d').clearRect(0, 0, dotArtCanvas.width, dotArtCanvas.height); // 前回の結果を消す
+                    };
+                    originalImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        convertButton.addEventListener('click', () => {
+            if (!originalImage) {
+                alert("まず画像を選択してください。");
+                return;
+            }
+
+            const dotSize = parseInt(dotSizeInput.value, 10);
+            if (isNaN(dotSize) || dotSize < 1) {
+                alert("ドットの粗さは1以上の半角数字で指定してください。");
+                return;
+            }
+
+            const originalWidth = originalImage.width;
+            const originalHeight = originalImage.height;
+
+            const hiddenCtx = hiddenOriginalCanvas.getContext('2d');
+            const imgData = hiddenCtx.getImageData(0, 0, originalWidth, originalHeight);
+            const pixels = imgData.data;
+
+            const dotArtWidth = Math.floor(originalWidth / dotSize);
+            const dotArtHeight = Math.floor(originalHeight / dotSize);
+
+            if (dotArtWidth === 0 || dotArtHeight === 0) {
+                alert("ドットの粗さが大きすぎて画像が生成できません。もっと小さい値を指定してください。");
+                return;
+            }
+
+            dotArtCanvas.width = dotArtWidth;
+            dotArtCanvas.height = dotArtHeight;
+            const dotArtCtx = dotArtCanvas.getContext('2d');
+            dotArtCtx.imageSmoothingEnabled = false; // ドット絵なのでアンチエイリアスを切る
+
+            for (let y = 0; y < dotArtHeight; y++) {
+                for (let x = 0; x < dotArtWidth; x++) {
+                    // 各ドットに対応する元画像のブロックの左上の座標
+                    const startX = x * dotSize;
+                    const startY = y * dotSize;
+
+                    // ブロックの中心のピクセル座標 (簡易版)
+                    // 領域外参照を避けるため、Math.min で元画像の範囲内に収める
+                    const sampleX = Math.min(startX + Math.floor(dotSize / 2), originalWidth - 1);
+                    const sampleY = Math.min(startY + Math.floor(dotSize / 2), originalHeight - 1);
+
+                    const pixelIndex = (sampleY * originalWidth + sampleX) * 4;
+                    const r = pixels[pixelIndex];
+                    const g = pixels[pixelIndex + 1];
+                    const b = pixels[pixelIndex + 2];
+                    const a = pixels[pixelIndex + 3];
+
+                    dotArtCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a / 255})`;
+                    dotArtCtx.fillRect(x, y, 1, 1);
+                }
+            }
+
+            downloadLink.href = dotArtCanvas.toDataURL('image/png');
+            downloadLink.style.display = 'inline-block';
+        });
+
+        function drawToCanvas(canvas, image, width, height) {
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = false; // プレビューもくっきりさせる
+            ctx.drawImage(image, 0, 0, width, height);
+        }
+    </script>
+</body>
+</html>
