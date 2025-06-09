@@ -6,6 +6,83 @@
     <title>秋ノ原窓也のホームページ</title>
     <!-- CSSのパスを games/style.css に変更 -->
     <link rel="stylesheet" href="games/style.css">
+    <!-- ▼▼▼ ここから追加：画像拡大表示のためのCSS ▼▼▼ -->
+    <style>
+        /* --- 画像の縮小表示とホバーエフェクト --- */
+
+        /* クリックで拡大する画像に適用する基本スタイル */
+        .clickable-image {
+            max-width: 100%; /* 親要素の幅を超えないようにする */
+            height: auto;    /* アスペクト比を維持 */
+            display: block;  /* 中央寄せやマージンを有効にする */
+            margin: 15px auto; /* 上下に余白を設け、左右は中央寄せ */
+            cursor: pointer; /* マウスカーソルをポインターにする */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* アニメーション効果 */
+            border-radius: 8px; /* 角を少し丸める */
+        }
+
+        /* 画像にマウスが乗った時のエフェクト */
+        .clickable-image:hover {
+            transform: scale(1.03); /* 少しだけ拡大する */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* 影をつけて浮き上がって見せる */
+        }
+
+
+        /* --- 画像拡大モーダルのためのスタイル --- */
+
+        /* モーダルウィンドウの背景 */
+        .image-modal {
+            display: none; /* 初期状態では非表示 */
+            position: fixed; /* 画面に固定 */
+            z-index: 1000; /* 他の要素より手前に表示 */
+            padding-top: 20px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* スクロールを可能にする */
+            background-color: rgba(0, 0, 0, 0.9); /* 半透明の黒い背景 */
+            animation: fadeIn 0.5s; /* フェードインアニメーション */
+        }
+
+        /* モーダル内の画像コンテンツ */
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh; /* 画面の高さの90%を最大とする */
+            animation: zoomIn 0.5s; /* ズームインアニメーション */
+        }
+
+        /* 閉じるボタン */
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* アニメーションの定義 */
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        @keyframes zoomIn {
+            from {transform: scale(0.8);}
+            to {transform: scale(1);}
+        }
+    </style>
+    <!-- ▲▲▲ ここまで追加 ▲▲▲ -->
 </head>
 <body>
     <header>
@@ -33,13 +110,13 @@
             <li class="dropdown">
                   <a href="javascript:void(0)" class="dropbtn">便利ツール</a>
                 <ul class="dropdown-content">
-                     <!-- ▼▼▼ ここにExif透かしツールへのリンクを追加 ▼▼▼ --> 
+                     <!-- ▼▼▼ ここにExif透かしツールへのリンクを追加 ▼▼▼ -->
                     <li><a href="tools/exif_watermarker.html">Exif透かしツール</a></li>
                      <!-- ▲▲▲ ここまで ▲▲▲ -->
                     <li><a href="tools/dotillust/dot_art_maker.html">ドッド絵っぽくするツール</a></li>
                     <li><a href="tools/memopad/memopad_enter.html">メモ帳 on browser</a></li>
                     <!-- 他の便利ツールを追加する場合はここに追加 -->
-                </ul> 
+                </ul>
             </li>
         </ul>
     </nav>
@@ -75,7 +152,8 @@
             <h3>パソコン編</h3>
             <div class="pc-info">
                 <h4>メイン (自作)</h4>
-                <img src="images/pc_main.jpg" alt="メインPC" class="pc-image">
+                <!-- ▼▼▼ 変更点: clickable-image クラスを追加 ▼▼▼ -->
+                <img src="images/pc_main.jpg" alt="メインPC" class="pc-image clickable-image">
                 <ul>
                     <li>cpu i3 12100f</li>
                     <li>gpu radeon rx6400lp</li>
@@ -88,7 +166,8 @@
             </div>
             <div class="pc-info">
                 <h4>サーバー（このページをホストしている）</h4>
-                <img src="images/pc_sub11.jpg" alt="サーバー（このページをホストしている）" class="pc-image">
+                <!-- ▼▼▼ 変更点: clickable-image クラスを追加 ▼▼▼ -->
+                <img src="images/pc_sub11.jpg" alt="サーバー（このページをホストしている）" class="pc-image clickable-image">
                 <ul>
                     <li>2台のパソコンにproxmoxを入れてクラスタとしています</li>
                     <li>nec mateベース(このページが入っているほう)</li>
@@ -114,7 +193,8 @@
 
         <section id="original-character" class="content-section">
             <h2>オリジナルキャラクターについて</h2>
-            <img src="images/aki_sisters_summary.png" alt="秋ノ原姉妹 詳細" class="original-character-summary-image">
+            <!-- ▼▼▼ 変更点: clickable-image クラスを追加 ▼▼▼ -->
+            <img src="images/aki_sisters_summary.png" alt="秋ノ原姉妹 詳細" class="original-character-summary-image clickable-image">
             <div class="character-description">
                 <p>殺伐とした終末世界で生きているという設定があったりする</p>
                 <p>妹の方しか設定が固まってないがダウナー系の少女</p>
@@ -154,6 +234,43 @@
     <footer>
         <p>© 2025 秋ノ原窓也</p>
     </footer>
+
+    <!-- ▼▼▼ ここから追加：画像拡大表示のためのHTMLとJavaScript ▼▼▼ -->
+    <!-- モーダル表示用のHTML要素 -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-button">×</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // モーダル関連の要素を取得
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close-button');
+
+        // クリックで拡大したいすべての画像にイベントリスナーを追加
+        document.querySelectorAll('.clickable-image').forEach(image => {
+            image.addEventListener('click', function() {
+                modal.style.display = 'block'; // モーダルを表示
+                modalImg.src = this.src;       // クリックされた画像のソースをモーダル画像に設定
+            });
+        });
+
+        // 閉じるボタンがクリックされたらモーダルを閉じる
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // モーダルの背景（画像以外の部分）がクリックされたらモーダルを閉じる
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+    </script>
+    <!-- ▲▲▲ ここまで追加 ▲▲▲ -->
 
 </body>
 </html>
