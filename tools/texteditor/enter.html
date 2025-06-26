@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テキストエディタ - 秋ノ原窓也のホームページ</title>
+    <!-- 既存のCSSへのパスを調整 -->
+    <link rel="stylesheet" href="../../games/style.css">
+    <style>
+        /* ゲートページ専用スタイル */
+        .content-section h2 {
+            margin-bottom: 25px;
+        }
+
+        .editor-choice-buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .button-markdown {
+            background-color: #007bff; /* 青 */
+        }
+        .button-markdown:hover {
+            background-color: #0056b3;
+        }
+
+        .button-text {
+            background-color: #28a745; /* 緑 */
+        }
+        .button-text:hover {
+            background-color: #1e7e34;
+        }
+
+        #markdown-help-section p {
+            line-height: 1.8;
+        }
+        #markdown-help-section a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        #markdown-help-section a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <!-- 画像パスを調整 -->
+            <img src="../../images/header_character.png" alt="キャラクター" class="header-character-image">
+            <h1>秋ノ原窓也のホームページ</h1>
+        </div>
+        <p class="site-description">秋ノ原窓也のホームページです。プロフィールや布陣情報などを書いています。ゆっくりしていってください</p>
+    </header>
+
+    <nav>
+        <ul>
+            <!-- ページ内リンクはそのまま（このページには対応セクションがないため機能しないがレイアウト維持） -->
+            <li><a href="../../index.html#profile">プロフィール</a></li>
+            <li><a href="../../index.html#lineup">布陣情報</a></li>
+            <li><a href="../../index.html#original-character">オリキャラ</a></li>
+            <li><a href="../../index.html#links">リンク集</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ゲーム</a>
+                <ul class="dropdown-content">
+                    <!-- リンクパスを調整 -->
+                    <li><a href="../../games/block/game.html">ブロック崩し</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                  <a href="javascript:void(0)" class="dropbtn">便利ツール</a>
+                <ul class="dropdown-content">
+                    <!-- リンクパスを調整 -->
+                    <li><a href="../exif_watermarker.html">Exif透かしツール</a></li>
+                    <li><a href="../dotillust/dot_art_maker.html">ドッド絵っぽくするツール</a></li>
+                    <li><a href="../memopad/memopad_enter.html">メモ帳 on browser</a></li>
+                    <li><a href="enter.html">テキストエディタ</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="content-section">
+            <h2>テキストエディタ</h2>
+            <p>このツールでは、ブラウザ上でMarkdownファイルまたはテキストファイルを簡単に編集し、保存することができます。用途に合わせて編集するファイル形式を選択してください。
+               変更したテキストは自動でブラウザに保存されるため、間違って閉じてしまっても「保存呼び出し」からすぐに再開できます。
+            </p>
+
+            <div class="editor-choice-buttons">
+                <a href="md/md.html?type=md" target="_blank" class="button button-markdown">Markdown を編集する</a>
+                <a href="txt/txt.html?type=txt" target="_blank" class="button button-text">テキストファイル を編集する</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 秋ノ原窓也</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テキストエディタ - 秋ノ原窓也</title>
+    <!-- 共通エディタスタイル -->
+    <link rel="stylesheet" href="../editor-styles.css">
+    <style>
+        /* テキストエディタ専用の微調整があればここに */
+        #text-editor-textarea {
+            width: 100%;
+            min-height: 400px; /* 十分な高さを確保 */
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-family: monospace; /* 等幅フォントが見やすいことが多い */
+            font-size: 1rem;
+            line-height: 1.5;
+            box-sizing: border-box; /* padding と border を幅と高さに含める */
+            resize: vertical; /* 縦方向のリサイズのみ許可 */
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <h1>テキストエディタ</h1>
+
+        <div id="message-area" class="message-area"></div>
+
+        <div class="toolbar-container">
+            <button id="save-txt-button">TXTとして保存</button>
+            <button id="save-screenshot-button-txt">スクリーンショット保存</button>
+            <label for="load-file-input-txt" class="button-like-label">既存ファイル読み込み</label>
+            <input type="file" id="load-file-input-txt" accept=".txt,text/plain,.md,text/markdown">
+            <button id="save-browser-button-txt">ブラウザに保存</button>
+            <button id="load-browser-button-txt" title="ブラウザに保存された内容を呼び出します (手動保存優先、最大1件)">保存呼び出し</button>
+        </div>
+
+        <textarea id="text-editor-textarea" placeholder="ここにテキストを入力してください..."></textarea>
+
+        <!-- プレビューエリアは不要なので削除 -->
+
+    </div>
+
+    <!-- ライブラリ (html2canvasのみ) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- メインのJavaScript (ES Moduleとして読み込む) -->
+    <script type="module" src="js/txt-editor-main.js"></script>
+</body>
+</html>

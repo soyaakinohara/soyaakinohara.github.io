@@ -1,0 +1,183 @@
+/* tools/textediter/editor-styles.css */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.editor-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.toolbar-container {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    flex-wrap: wrap; /* ボタンが多い場合に折り返す */
+    gap: 10px; /* ボタン間の隙間 */
+}
+
+.toolbar-container button,
+.toolbar-container .button-like-label {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+    color: #495057;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap; /* ボタン名が改行されないように */
+}
+.toolbar-container button:hover,
+.toolbar-container .button-like-label:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+.toolbar-container .button-like-label { /* labelをボタン風に見せるため */
+    display: inline-flex; /* align-items を有効にするため */
+    align-items: center;
+    justify-content: center;
+}
+.toolbar-container input[type="file"] {
+    display: none; /* input[type=file]自体は隠す */
+}
+
+/* EasyMDEのカスタマイズ (必要に応じて) */
+.EasyMDEContainer .CodeMirror {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+.EasyMDEContainer .editor-toolbar {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: none;
+}
+.EasyMDEContainer .editor-toolbar button { /* EasyMDEツールバー内のボタン */
+    border-radius: 3px;
+}
+
+#preview-container {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #e9ecef;
+}
+#preview-container h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #343a40;
+}
+
+#markdown-preview {
+    min-height: 150px;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    background-color: #fdfdfd;
+    border-radius: 4px;
+    overflow-y: auto;
+    /* 以下、基本的なMarkdown表示スタイル */
+    word-wrap: break-word;
+}
+#markdown-preview > *:first-child { margin-top: 0; }
+#markdown-preview > *:last-child { margin-bottom: 0; }
+
+#markdown-preview h1, #markdown-preview h2, #markdown-preview h3,
+#markdown-preview h4, #markdown-preview h5, #markdown-preview h6 {
+    margin-top: 1.4em;
+    margin-bottom: 0.8em;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #212529;
+}
+#markdown-preview h1 { font-size: 2em; border-bottom: 1px solid #dee2e6; padding-bottom: 0.3em; }
+#markdown-preview h2 { font-size: 1.75em; border-bottom: 1px solid #e9ecef; padding-bottom: 0.3em; }
+#markdown-preview h3 { font-size: 1.5em; }
+#markdown-preview h4 { font-size: 1.25em; }
+#markdown-preview p { margin-bottom: 1em; }
+#markdown-preview ul, #markdown-preview ol { margin-bottom: 1em; padding-left: 2em; }
+#markdown-preview li { margin-bottom: 0.4em; }
+#markdown-preview blockquote {
+    padding: 10px 15px;
+    margin: 0 0 1em;
+    border-left: 4px solid #adb5bd;
+    color: #495057;
+    background-color: #f1f3f5;
+}
+#markdown-preview pre {
+    background-color: #f1f3f5;
+    padding: 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9em;
+    line-height: 1.45;
+}
+#markdown-preview code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    background-color: rgba(27,31,35,0.05);
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 3px;
+}
+#markdown-preview pre code {
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+#markdown-preview table {
+    border-collapse: collapse;
+    width: auto; /* width: 100%; にすると親要素いっぱいに広がる */
+    margin-bottom: 1em;
+    display: block; /* 横スクロールを有効にするため */
+    overflow-x: auto;
+}
+#markdown-preview th, #markdown-preview td {
+    border: 1px solid #dee2e6;
+    padding: 8px 12px;
+    text-align: left;
+}
+#markdown-preview th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+#markdown-preview img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+#markdown-preview hr {
+    height: .25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #e1e4e8;
+    border: 0;
+}
+
+/* メッセージ表示エリア */
+.message-area {
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+    display: none; /* 初期は非表示 */
+    color: #fff;
+}
+.message-area.info { background-color: #007bff; }
+.message-area.success { background-color: #28a745; }
+.message-area.error { background-color: #dc3545; }
+.message-area.warning { background-color: #ffc107; color: #212529; }
