@@ -29,12 +29,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding-top: 15vh;
+            justify-content: center;
             z-index: 1000;
             transition: opacity 0.5s ease, visibility 0.5s ease;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
         .landing-page.hidden {
@@ -56,7 +53,6 @@
                 inset 0 0 0 1px rgba(255, 255, 255, 0.1);
             max-width: 500px;
             width: 90%;
-            margin-bottom: 40px;
         }
 
         .landing-title-row {
@@ -133,26 +129,29 @@
         }
 
         .landing-dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            margin-top: 10px;
-            background: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            max-height: 0;
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            max-height: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             overflow: hidden;
             opacity: 0;
             transition: all 0.3s ease;
+            z-index: 2000;
         }
 
         .landing-dropdown-content.show {
-            max-height: 70vh;
+            max-height: 60vh;
             opacity: 1;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .landing-dropdown-content a {
