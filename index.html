@@ -29,9 +29,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-top: 15vh;
             z-index: 1000;
             transition: opacity 0.5s ease, visibility 0.5s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .landing-page.hidden {
@@ -53,6 +56,7 @@
                 inset 0 0 0 1px rgba(255, 255, 255, 0.1);
             max-width: 500px;
             width: 90%;
+            margin-bottom: 40px;
         }
 
         .landing-title-row {
