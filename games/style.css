@@ -1,50 +1,116 @@
+/* ============================================
+   秋ノ原窓也のホームページ - 新デザインCSS
+   リキッドグラス風ヘッダー + スクロールボタン機能
+   ============================================ */
+
 /* 基本スタイル */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* ベースの背景色 */
+    background: #869ea0;
+    background-attachment: fixed;
     color: #333;
+    min-height: 100vh;
 }
 
-/* ヘッダー */
+/* ============================================
+   ヘッダー - シンプル
+   ============================================ */
 header {
-    background-color: #869ea0; /* ラフの #869eal に近い色 (仮) */
+    background: rgba(134, 158, 160, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
-    padding: 20px;
-    text-align: center; /* 全体図を参考に中央揃え気味に */
-}
-
-.header-content {
+    padding: 12px 20px;
     display: flex;
     align-items: center;
-    justify-content: center; /* タイトルと画像を中央に寄せる */
-    gap: 20px; /* タイトルと画像の間のスペース */
-    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.header-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+    margin-right: 12px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 2em; /* 少し大きめに */
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
-.header-character-image {
-    max-height: 80px; /* キャラクター画像の最大の高さ */
-    width: auto;
-    border-radius: 50%; /* 丸くするなら */
-    border: 2px solid #fff; /* 白い枠線 */
+header h1 a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+header h1 a:hover {
+    opacity: 0.8;
 }
 
 .site-description {
-    font-size: 0.9em;
-    margin-top: 10px;
+    display: none;
 }
 
-/* ナビゲーション */
+.header-content {
+    display: none;
+}
+
+.header-character-image {
+    display: none;
+}
+    width: auto;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-character-image:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.site-description {
+    font-size: 1em;
+    margin-top: 10px;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ============================================
+   ナビゲーション - プルダウンメニュー
+   ============================================ */
 nav {
-    background-color: #333;
-    padding: 10px 0;
+    background: rgba(51, 51, 51, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 nav ul {
@@ -52,200 +118,322 @@ nav ul {
     padding: 0;
     margin: 0;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 nav ul li {
-    display: inline-block; /* 横並びにする場合 */
-    /* display: block; */ /* 縦並びでボタン風にする場合はこちらを有効化 */
-    margin: 0 10px; /* 横並びの場合の左右マージン */
-    /* margin-bottom: 10px; */ /* 縦並びの場合の下マージン */
-    position: relative; /* プルダウンのために追加 */
+    display: inline-block;
+    position: relative;
 }
 
-/* --- ここからプルダウンメニュー用のスタイルを追加 --- */
-
-/* ドロップダウンの親要素(.dropdown) */
-nav ul li.dropdown {
-    /* 特に新しいスタイルは不要な場合が多い */
-}
-
-/* ドロップダウンボタン(.dropbtn) - 必要であれば個別にスタイル調整 */
-nav ul li.dropdown .dropbtn {
-    /* display: inline-block; /* aタグなので元々block */
-}
-
-/* ドロップダウンコンテンツ本体 (初期状態は非表示) */
+/* ドロップダウンコンテンツ (初期状態は非表示) */
 nav ul li.dropdown .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #444; /* プルダウンの背景色 */
-    min-width: 160px; /* プルダウンの最小幅 */
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1; /* 他の要素より手前に表示 */
-    border-radius: 0 0 5px 5px; /* 下角だけ丸めるなど */
-    left: 0; /* 親liの左端に合わせる */
-    top: 100%; /* 親liのすぐ下に表示 */
+    background: rgba(60, 60, 60, 0.98);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    min-width: 200px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-top: none;
+    left: 0;
+    top: 100%;
+    overflow: hidden;
 }
 
-/* ドロップダウン内のリンク */
 nav ul li.dropdown .dropdown-content li {
-    display: block; /* 縦並びにする */
-    margin: 0; /* li間のマージンをリセット */
+    display: block;
+    margin: 0;
 }
 
 nav ul li.dropdown .dropdown-content li a {
-    color: white;
-    padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.95);
+    padding: 12px 20px;
     text-decoration: none;
     display: block;
-    text-align: left; /* 左揃えにする */
-    border-radius: 0; /* 個々のリンクの角丸は不要なら */
+    text-align: left;
+    border-radius: 0;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* ドロップダウン内のリンクのホバーエフェクト */
 nav ul li.dropdown .dropdown-content li a:hover {
-    background-color: #666;
+    background: rgba(134, 158, 160, 0.8);
+    padding-left: 25px;
 }
 
-/* 親要素(.dropdown) にホバーした時にドロップダウンコンテンツを表示 */
+nav ul li.dropdown .dropdown-content li:last-child a {
+    border-bottom: none;
+}
+
+/* 親要素にホバーした時にドロップダウンを表示 */
 nav ul li.dropdown:hover .dropdown-content {
     display: block;
+    animation: fadeInDown 0.2s ease;
 }
 
-/* レスポンシブ対応の調整 (スマホで縦並びになった時) */
-@media (max-width: 768px) {
-    /* 既存の nav ul li { display: block; } は活かす */
-
-    nav ul li.dropdown .dropdown-content {
-        position: static; /* 通常のブロック要素として振る舞う */
-        display: none; /* 初期は隠す、JSで開閉制御が推奨 */
-        box-shadow: none;
-        background-color: #3a3a3a; /* 少し色を変えても良い */
-        padding-left: 15px; /* インデントをつける */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
     }
-
-    /* スマホ表示でプルダウンを常に開いておくか、
-       もしくはJSでクリック開閉にするかの判断が必要。
-       CSSだけでのホバーはタッチデバイスでは使いにくい。
-       ここでは、ホバーで開く挙動のままですが、
-       JSでの制御を検討する方が良いでしょう。
-
-       もしCSSだけで常に開いておくなら以下のように display:block にします。
-       nav ul li.dropdown:hover .dropdown-content,
-       nav ul li.dropdown .dropdown-content { // スマホでは常に開いておく場合
-           display: block;
-       }
-    */
-
-    /* クリックで開閉するための簡単なJSの例（CSSのみでは限界あり）
-       以下のJSを別途追加する必要があります。
-    */
-    /*
-    document.querySelectorAll('.dropbtn').forEach(button => {
-        button.addEventListener('click', function(event) {
-            if (window.innerWidth <= 768) {
-                event.preventDefault(); // a タグのデフォルト動作を止める
-                let content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            }
-        });
-    });
-    */
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 nav ul li a {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.95);
     text-decoration: none;
-    padding: 10px 15px;
-    display: block; /* クリック範囲を広げる */
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    padding: 10px 18px;
+    display: block;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 nav ul li a:hover {
-    background-color: #555;
+    background: rgba(134, 158, 160, 0.9);
+    transform: translateY(-2px);
 }
 
+nav ul li a.dropbtn::after {
+    content: ' ▼';
+    font-size: 0.7em;
+    opacity: 0.7;
+}
 
-/* メインコンテンツ */
+/* ============================================
+   メインコンテンツ - ガラスカード風
+   ============================================ */
 main {
-    padding: 20px;
-    max-width: 900px; /* メインコンテンツの最大幅 */
-    margin: 20px auto; /* 中央揃え */
-    background-color: #fff; /* コンテンツエリアの背景色 */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* ちょっと影をつける */
+    padding: 30px 20px;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(134, 158, 160, 0.05) 0%, transparent 100%);
+    pointer-events: none;
 }
 
 .content-section {
-    padding: 20px 0;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #eee; /* セクション間の区切り線 */
+    padding: 25px 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(134, 158, 160, 0.2);
+    position: relative;
 }
 
 .content-section:last-child {
-    border-bottom: none; /* 最後のセクションの線は消す */
+    border-bottom: none;
 }
 
 .content-section h2 {
     color: #333;
     margin-top: 0;
-    border-bottom: 2px solid #869eaf; /* ヘッダーの色と合わせる */
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    border-bottom: 3px solid rgba(134, 158, 160, 0.8);
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
 }
 
 .content-section h3 {
     color: #555;
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.3em;
 }
+
 .content-section h4 {
     color: #666;
     margin-top: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-/* 画像共通スタイル */
+/* ============================================
+   スクロールボタン
+   ============================================ */
+.scroll-button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(134, 158, 160, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+}
+
+.scroll-button.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-button:hover {
+    background: rgba(118, 139, 141, 1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.scroll-button:active {
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   画像スタイル
+   ============================================ */
 img.pc-image,
 img.character-image,
 img.gensan-image {
-    max-width: 100%; /* コンテナ幅に合わせて縮小 */
+    max-width: 100%;
     height: auto;
-    display: block; /* 余計な下マージンを防ぐ */
-    margin: 10px 0; /* 上下マージン */
-    border-radius: 5px; /* 角を少し丸める */
+    display: block;
+    margin: 15px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* 布陣情報 PC画像 */
 .pc-info {
-    margin-bottom: 20px;
-}
-.pc-image {
-    max-width: 250px; /* PC画像の最大幅を調整 */
-    /* float: right; */ /* 右寄せにする場合 (調整が必要) */
-    /* margin-left: 15px; */ /* 右寄せする場合の左マージン */
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(134, 158, 160, 0.05);
+    border-radius: 12px;
 }
 
-/* オリジナルキャラクター */
+.pc-image {
+    max-width: 300px;
+}
+
+/* クリック可能な画像 */
+.clickable-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.clickable-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* 画像拡大モーダル */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #bbb;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0.9); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+/* ============================================
+   キャラクタープロフィール
+   ============================================ */
 .character-profile {
-    display: flex; /* 横並びにする */
-    flex-wrap: wrap; /* 画面が狭い場合は折り返す */
-    gap: 20px; /* キャラ間のスペース */
-    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-bottom: 25px;
 }
 
 .character-item {
-    flex: 1; /* スペースを均等に分ける */
-    min-width: 200px; /* 最小幅 */
+    flex: 1;
+    min-width: 200px;
     text-align: center;
+    padding: 20px;
+    background: rgba(134, 158, 160, 0.05);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.character-item:hover {
+    transform: translateY(-5px);
 }
 
 .character-image {
-    max-height: 200px; /* キャラクター画像の高さ調整 */
+    max-height: 200px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -253,52 +441,258 @@ img.gensan-image {
 .gensan-images {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
+    justify-content: center;
 }
+
 .gensan-image {
-    max-height: 150px; /* 原案画像の高さ調整 */
+    max-height: 150px;
 }
 
-
-/* リンク集 */
+/* ============================================
+   リンク集
+   ============================================ */
 #links ul {
-    list-style-type: disc; /* 通常の箇条書きマーカー */
-    padding-left: 20px;
+    list-style-type: disc;
+    padding-left: 25px;
 }
 
 #links a {
-    color: #007bff; /* リンクの色 */
+    color: #667eea;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 #links a:hover {
+    color: #764ba2;
     text-decoration: underline;
 }
 
-
-/* フッター */
+/* ============================================
+   フッター
+   ============================================ */
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
-    margin-top: 30px;
+    padding: 25px;
+    background: rgba(51, 51, 51, 0.95);
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: auto;
 }
 
-/* レスポンシブ対応 (簡単なもの) */
+footer p {
+    margin: 0;
+}
+
+/* ============================================
+   ページレイアウト（フッター固定用）
+   ============================================ */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* ============================================
+   レスポンシブ対応
+   ============================================ */
 @media (max-width: 768px) {
+    header {
+        padding: 20px 15px;
+    }
+    
     header h1 {
         font-size: 1.5em;
     }
+    
     .header-content {
-        flex-direction: column; /* ヘッダーのタイトルと画像を縦並びに */
+        flex-direction: column;
+        gap: 15px;
     }
+    
+    .header-character-image {
+        max-height: 70px;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
     nav ul li {
-        display: block; /* スマホではナビゲーションを縦並びに */
-        margin: 10px 0;
+        display: block;
+        width: 100%;
     }
+    
+    nav ul li a {
+        padding: 12px 15px;
+    }
+    
+    nav ul li.dropdown .dropdown-content {
+        position: static;
+        display: none;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        background: rgba(40, 40, 40, 0.98);
+    }
+    
+    nav ul li.dropdown .dropdown-content li a {
+        padding-left: 30px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    nav ul li.dropdown:hover .dropdown-content {
+        display: none;
+    }
+    
+    nav ul li.dropdown.active .dropdown-content {
+        display: block;
+    }
+    
+    main {
+        margin: 15px;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
     .character-profile {
-        flex-direction: column; /* スマホではキャラプロフを縦並びに */
+        flex-direction: column;
         align-items: center;
     }
+    
+    .scroll-button {
+        right: 15px;
+        bottom: 15px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ============================================
+   ツールページ専用スタイル
+   ============================================ */
+.tool-container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.tool-container h2 {
+    border-bottom: 3px solid rgba(134, 158, 160, 0.8);
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+}
+
+/* エンターページ用 */
+.enter-container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.enter-container h2 {
+    border-bottom: 3px solid rgba(134, 158, 160, 0.8);
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    font-size: 1.9em;
+}
+
+.enter-description {
+    font-size: 1.1em;
+    line-height: 1.9;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.tool-link-button,
+.button {
+    display: inline-block;
+    padding: 14px 35px;
+    background: linear-gradient(135deg, rgba(134, 158, 160, 0.9) 0%, rgba(118, 139, 141, 0.9) 100%);
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.tool-link-button:hover,
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, rgba(134, 158, 160, 1) 0%, rgba(118, 139, 141, 1) 100%);
+}
+
+/* ゲームページ用 */
+#gameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+#gameCanvas {
+    border: 2px solid rgba(134, 158, 160, 0.5);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #555;
+    visibility: hidden;
+}
+
+.game-button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    color: #fff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.game-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+#startButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 18px 40px;
+    font-size: 1.6em;
+}
+
+#retryButton {
+    display: none;
 }
